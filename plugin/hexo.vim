@@ -142,6 +142,16 @@ fun! HexoD()
     endif
 endfun
 
+fun! MeHexoP()
+    if(executable('hexo'))
+        call OpenHexoRootPath()
+        let s:filename =  expand('%')
+        execute "!git add . && git commit -m \"add " . s:filename  ."\" && git push origin hexo"
+    elseif
+        echom 'no hexo found!'
+    endif
+endfun
+
 command! HexoOpen :call OpenHexoPostPathAndNERDTree()
 command! HexoOpenDraft :call OpenHexoDraftPathAndNERDTree()
 command! -nargs=+ HexoNew :call NewHexoPost("<args>")
@@ -150,3 +160,4 @@ command! -nargs=+ HexoPublish :call HexoPublish("<args>")
 command! HexoC :call HexoC()
 command! HexoG :call HexoG()
 command! HexoD :call HexoD()
+command! MeHexoP :call MeHexoP()
